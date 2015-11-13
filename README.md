@@ -5,6 +5,8 @@ A plugin for quickly switching views in Sublime Text 3.
 If you have trouble with keeping track of your open tabs, you came to the right place. PowerShift brings speed and order to your environment.
 By using PowerShift, you won't have to search for that one tab you had open five minutes ago, only to find it in the wrong pane.
 
+![Power Switch](https://cloud.githubusercontent.com/assets/8056203/11155699/73a22836-8a47-11e5-83b5-5a39df440926.gif)
+
 ## Installation
 
 ### Manual installation
