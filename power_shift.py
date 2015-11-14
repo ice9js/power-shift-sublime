@@ -1,15 +1,25 @@
 import sublime_plugin
 import os
 
-def get_view_name(view):
-    """Returns the name for the passed view"""
-    return view.name() or os.path.basename(view.file_name())
+def get_folder_for_view(view, folders):
+    for folder in folders:
+        if view.file_name() and view.file_name().startswith(folder):
+            return os.path.relpath(view.file_name(), folder)
 
-def get_views_names(views):
+    return ""
+
+def get_view_info(view, folders):
+    """Returns the name for the passed view"""
+    return [
+        view.name() or os.path.basename(view.file_name()),
+        get_folder_for_view(view, folders)
+    ]
+
+def get_view_list(views, folders):
     """Returns a list of the names of the passed views"""
     names = []
     for view in views:
-        names.append(get_view_name(view))
+        names.append(get_view_info(view, folders))
     return names
 
 class PowerShiftCommand(sublime_plugin.WindowCommand):
@@ -21,7 +31,7 @@ class PowerShiftCommand(sublime_plugin.WindowCommand):
         self.views = self.window.views()
 
         self.window.show_quick_panel(
-            get_views_names(self.views),
+            get_view_list(self.views, self.window.folders()),
             self.shift_view
         )
 
