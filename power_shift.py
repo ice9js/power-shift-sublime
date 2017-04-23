@@ -19,7 +19,8 @@ def get_view_list(views, folders):
     """Returns a list of the names of the passed views"""
     names = []
     for view in views:
-        names.append(get_view_info(view, folders))
+        if view.file_name() or view.name():
+            names.append(get_view_info(view, folders))
     return names
 
 class PowerShiftCommand(sublime_plugin.WindowCommand):
